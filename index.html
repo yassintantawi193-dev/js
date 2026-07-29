@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1 id="title">My To-Do List</h1>
+    <input type="text" id="task-input" placeholder="Enter a task" />
+    <button type="button" id="addBtn">Add Task</button>
+
+    <p id="message"></p>
+    <p>Total tasks: <span id="task-count">0</span></p>
+    <ul id="task-list"></ul>
+    <style>
+      #title {
+  color: blue;
+  text-align: center;
+}
+
+input {
+  width: 80%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+#addBtn {
+  background-color: #1d4ecd;
+  color: white;
+  padding: 10px 12px;
+  border: none;
+   border-radius: 10px;
+  display: block;
+  margin-top: 10px;
+}
+button:hover {
+  background-color: #0d2a8c;
+}
+button{
+  background-color: #1d4ecd;
+  color: white;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+message{
+  font-weight: bold;
+  color: #0d2a8c;
+  
+}
+li {
+  background-color: #f2f2f2;
+  padding: 10px;
+  margin-top:12px;
+  border-radius: 8px;
+}
+li span {
+  display: block;
+  font-weight: bold; 
+  margin-bottom: 10px;
+}
+li input {
+margin-top: 10px;
+ }
+    </style>
+    <script>
+      const taskInput = document.getElementById("task-input");
+const addBtn = document.getElementById("addBtn");
+const message = document.getElementById("message");
+const taskCount = document.getElementById("task-count");
+const taskList = document.getElementById("task-list");
+
+let count = 0;
+
+addBtn.addEventListener("click", function () {
+  let taskText = taskInput.value.trim();
+
+  if (taskText === "") {
+    message.textContent = "Please enter a task.";
+    return;
+  }
+  let li = document.createElement("li");
+
+  let taskSpan = document.createElement("span");
+  taskSpan.textContent = taskText;
+
+  let noteInput = document.createElement("input");
+  noteInput.type = "text";
+  noteInput.placeholder = "Add a note...";
+
+  let deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "Delete";
+
+  li.appendChild(taskSpan);
+  li.appendChild(deleteBtn);
+  li.appendChild(noteInput);
+  taskList.appendChild(li);
+
+  count++;
+  taskCount.textContent = count;
+  message.textContent = "Task added successfully.";
+  taskInput.value = "";
+
+  deleteBtn.addEventListener("click", function () {
+    li.remove();
+    count--;
+    message.textContent = "Task deleted";
+
+  });
+});
+    </script>
+  </body>
+</html>
